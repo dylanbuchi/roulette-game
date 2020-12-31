@@ -168,6 +168,7 @@ def check_welcome_bonus(claimed_bonus):
 def user_interface():
     claimed_bonus = False
     user_bank = deposit()
+    minimum_bet = 10
     print_balance(user_bank)
 
     while True:
@@ -178,8 +179,11 @@ def user_interface():
 
         user_bank = play_roulette_game(user_bank)
 
-        if (user_bank <= 0):
-            print("Deposit more to play again!")
+        if (user_bank <= minimum_bet):
+            print_balance(user_bank)
+            print(
+                f"Not enough money to play, deposit at least {colored(f'{minimum_bet}$', 'green')} and come back later"
+            )
             exit()
 
         play_again = input("Play again ? (y/n)").lower()
